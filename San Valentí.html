@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffcccb; /* Fondo rosado */
+            font-family: Arial, sans-serif;
+            position: relative;
+            margin: 0; /* Elimina el margen por defecto */
+        }
+        img {
+            width: 300px; /* Ajusta el tamaño de la imagen según sea necesario */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centra los botones */
+            width: 100%; /* Ocupa todo el ancho disponible */
+            margin-top: 20px; /* Espacio entre la imagen y los botones */
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s; /* Transición suave para el tamaño */
+            flex: 1; /* Permite que los botones ocupen el mismo espacio */
+            min-width: 120px; /* Ancho mínimo para los botones */
+            max-width: 150px; /* Ancho máximo para los botones */
+        }
+        .red {
+            background-color: red;
+            color: white;
+        }
+        .green {
+            background-color: green;
+            color: white;
+        }
+        .message {
+            display: none; /* Oculta el mensaje inicialmente */
+            margin-top: 20px; /* Espacio entre la imagen y el mensaje */
+            text-align: center; /* Centra el texto */
+        }
+    </style>
+</head>
+<body>
+
+    <img id="cinnamonImage" src="https://i.ibb.co/mVY962Dm/pngwing-com.png" alt="Cinnamonroll">
+    <h2 id="question">¿Quieres ser mi San Valentín?</h2>
+    <div class="button-container">
+        <button class="button green" id="yesButton">Sí, mi niño</button>
+        <button class="button red" id="noButton">NO</button>
+    </div>
+    <div class="message" id="messageContainer">
+        <img src="https://i.ibb.co/3XQ0mq9/pngwing-com-1.png" alt="Cinnamonroll alegre" style="width: 300px;">
+        <h2>SABÍA QUE IBAS A ACEPTAR, TE AMOOOOO 💗</h2>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        const messageContainer = document.getElementById('messageContainer');
+        const question = document.getElementById('question');
+        const cinnamonImage = document.getElementById('cinnamonImage'); 
+
+        // Variable para controlar el tamaño del botón verde
+        let scale = 1;
+
+        // Texto que cambiará en el botón rojo
+        const redButtonTexts = [
+            "NO", 
+            "¿Estás segura?",  
+            "Piénsalo", 
+            "No seas malita", 
+            "Yo te amo", 
+            "Piensa en nuestro hijo", 
+            "Te hago cartitas", 
+            "Malaaa", 
+            "Ya di que sí", 
+            ":c"
+        ];
+        let redButtonIndex = 0; // Índice para el texto del botón rojo
+
+        // Evento para el botón rojo
+        noButton.addEventListener('click', function() {
+            // Aumentar el tamaño del botón verde
+            scale += 0.1; // Aumenta el tamaño
+            yesButton.style.transform = `scale(${scale})`; // Aplica el nuevo tamaño
+            
+            // Cambiar el texto del botón rojo
+            redButtonIndex++;
+            if (redButtonIndex < redButtonTexts.length) {
+                noButton.textContent = redButtonTexts[redButtonIndex];
+            }
+        });
+
+        // Evento para el botón verde
+        yesButton.addEventListener('click', function() {
+            // Ocultar la imagen, la pregunta y los botones
+            cinnamonImage.style.display = 'none';
+            question.style.display = 'none';
+            document.querySelector('.button-container').style.display = 'none';
+            noButton.style.display = 'none'; // Ocultar el botón rojo
+            // Mostrar el mensaje y la imagen alegre
+            messageContainer.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
